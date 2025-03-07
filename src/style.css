@@ -1,0 +1,156 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  #modalBox{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    width:100vw;
+    height:100vh;
+    background-color: rgba(0,0,0,0.4);
+  }
+
+  #modal{
+    width: fit-content;
+    margin:auto;
+    margin-top:40px;
+    background-color:white;
+    display: flex;
+    justify-content: center;
+
+    
+  }
+
+
+#wrapperProject{
+    display: flex;
+}
+
+
+#projectBox{
+    height:400px;
+    width:150px;
+    border: 3px solid black;
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+}
+
+#projectBox>input{
+    width:100%;
+}
+
+#addProjectBoxButtons{
+    display:flex;
+    justify-content: space-evenly;
+    
+}
+
+#todoBox{
+   /*  height:400px;
+    width:900px; */
+    flex-grow: 1;
+    border: 3px solid black;
+}
+
+#addTaskArea{
+    display: flex;
+    justify-content: space-between;
+}
+
+#addTaskArea > button{
+    background: none;
+    border:none;
+    font-size: 16px;
+}
+
+#addTaskArea > button:hover{
+    color: red;
+    cursor: pointer;
+}
+
+.addTaskDiv{
+    border: 3px solid grey;
+    border-radius: 4px;
+    width:400px;
+    margin:20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:10px;
+    padding:10px;
+}
+
+.addTaskDiv>input{
+    border: none;
+    width:50%;
+}
+
+.addTaskDivButtons{
+    width:100%;
+    display: flex;
+    justify-content: flex-end;
+    gap:10px;
+}
+
+.cancelButton,.addButton{
+    width:64px;
+    height:32px;
+    background-color: whitesmoke;
+    border-radius: 8px;
+
+}
+
+.addButton{
+    background-color: red;
+    color:white;
+}
+
+.addTaskDivButtons>button:hover{
+    cursor: pointer;
+}
+
+.selectBox{
+    width:50%;
+    
+}
+
+
+.divTasks{
+    border: 2px solid black;
+    margin:5px;
+} 
+
+.taskDetailsDiv{
+    display: flex;
+    padding:4px;
+}
+
+.checkBox{
+    width:20px;
+    height:20px;
+    border: 1px solid black;
+    border-radius: 2px;
+    align-self:center;
+    margin-left:10px;
+    margin-right:10px;
+}
+
+.checkBox:hover{
+    cursor: pointer;
+}
+
+.editButton{
+    margin-left:auto;
+    margin-right:10px;
+}
+
+
+.priorityColorDiv{
+    width:100%;
+    height:6px;
+}
+
