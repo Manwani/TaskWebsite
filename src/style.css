@@ -114,8 +114,15 @@
 }
 
 .selectBox{
-    width:50%;
+  
+}
+
+.inputy{
     
+}
+
+.divForClass{
+    display: flex;
 }
 
 

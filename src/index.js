@@ -213,33 +213,33 @@ function populateTodos(project){
         taskName.className = "taskDetails";
         taskName.textContent = result["title"];
 
-      /*   let para2 = document.createElement("p");
-        para2.className = "taskDetails";
-        para2.textContent = result["description"];
+      /*   let description = document.createElement("p");
+        description.className = "taskDetails";
+        description.textContent = result["description"];
 
-        let para3 = document.createElement("p");
-        //para3.type = "date";
-        para3.className = "taskDetails";
-        para3.textContent = result["dueDate"];
+        let dueDate = document.createElement("p");
+        //dueDate.type = "date";
+        dueDate.className = "taskDetails";
+        dueDate.textContent = result["dueDate"];
         
 
-        let para4 = document.createElement("p");
-        para4.className = "taskDetails";
-        para4.textContent = result["priority"];
+        let priority = document.createElement("p");
+        priority.className = "taskDetails";
+        priority.textContent = result["priority"];
 
 
         let para5 = document.createElement("select");
         para5.className = "projectList";
-        let opt1 = document.createElement("option");
-        opt1.value = project.name;
-        opt1.textContent = project.name;
-        para5.appendChild(opt1);
+        let high = document.createElement("option");
+        high.value = project.name;
+        high.textContent = project.name;
+        para5.appendChild(high);
         loadOtherProjectsForSelectBox(para5); */
        
 
-       /*  taskDiv.appendChild(para2);
-        taskDiv.appendChild(para3);
-        taskDiv.appendChild(para4);
+       /*  taskDiv.appendChild(description);
+        taskDiv.appendChild(dueDate);
+        taskDiv.appendChild(priority);
         taskDiv.appendChild(para5);
  */
 
@@ -314,37 +314,37 @@ function openTodoForm(){
     para.className = "inputy";
     para.placeholder = "Todo Name";
    
-    let para2 = document.createElement("input");
-    para2.className = "inputy";
-    para2.placeholder = "Todo Description";
+    let description = document.createElement("input");
+    description.className = "inputy";
+    description.placeholder = "Todo Description";
 
 
-    let para3 = document.createElement("input");
-    para3.type = "date";
-    para3.className = "inputy";
+    let dueDate = document.createElement("input");
+    dueDate.type = "date";
+    dueDate.className = "inputy";
 
-    let para4 = document.createElement("select");
-    para4.className = "selectBox";
+    let priority = document.createElement("select");
+    priority.className = "selectBox";
 
     let opt0 = document.createElement("option");
     opt0.value = "Priority:";
     opt0.textContent = "Priority:";
-    para4.appendChild(opt0);
+    priority.appendChild(opt0);
 
-    let opt1 = document.createElement("option");
-    opt1.value = "High";
-    opt1.textContent = "High";
-    para4.appendChild(opt1);
+    let high = document.createElement("option");
+    high.value = "High";
+    high.textContent = "High";
+    priority.appendChild(high);
 
-    let opt2 = document.createElement("option");
-    opt2.value = "Medium";
-    opt2.textContent = "Medium";
-    para4.appendChild(opt2);
+    let medium = document.createElement("option");
+    medium.value = "Medium";
+    medium.textContent = "Medium";
+    priority.appendChild(medium);
 
-    let opt3 = document.createElement("option");
-    opt3.value = "Low";
-    opt3.textContent = "Low";
-    para4.appendChild(opt3);
+    let low = document.createElement("option");
+    low.value = "Low";
+    low.textContent = "Low";
+    priority.appendChild(low);
 
 
     let addButton = document.createElement("button");
@@ -363,7 +363,7 @@ function openTodoForm(){
 
     addButton.addEventListener("click", function(){
         let currentProject = Master.getCurrentMasterElement();
-        let newTodo = new Todo(para.value, para2.value, para3.value, para4.value);
+        let newTodo = new Todo(para.value, description.value, dueDate.value, priority.value);
         currentProject.addTodo(newTodo);
         refreshTodos();
         populateTodos(currentProject);
@@ -375,9 +375,9 @@ function openTodoForm(){
     
 
     addTaskDiv.appendChild(para);
-    addTaskDiv.appendChild(para2);
-    addTaskDiv.appendChild(para3);
-    addTaskDiv.appendChild(para4);
+    addTaskDiv.appendChild(description);
+    addTaskDiv.appendChild(dueDate);
+    addTaskDiv.appendChild(priority);
     addTaskDivButtons.appendChild(cancelButton);
     addTaskDivButtons.appendChild(addButton);
     addTaskDiv.appendChild(addTaskDivButtons);
@@ -458,51 +458,83 @@ function openModal(project, id){
 
     let modal = document.getElementById("modal");
 
-    let para = document.createElement("input");
-    para.className = "inputy";
-    para.placeholder = todo.title;
-   
-    
-    
+    //title cluster
+    let titleLabel = document.createElement("label");
+    titleLabel.setAttribute("for", "title" );
+    titleLabel.innerText = "Title:";
 
-    
-   
-    let para2 = document.createElement("input");
-    para2.className = "inputy";
-    para2.placeholder = todo.description;
+    let title= document.createElement("input");
+    title.className = "inputy";
+    title.value = todo.title;
+    title.id = "title";
+
+    let titleDiv = document.createElement("div");
+    titleDiv.className = "divForClass";
+    titleDiv.appendChild(titleLabel);
+    titleDiv.appendChild(title);
 
 
-    let para3 = document.createElement("input");
-    para3.type = "date";
-    para3.className = "inputy";
-    para3.value = todo.dueDate;
+    //description cluster
+    let descriptionLabel = document.createElement("label");
+    descriptionLabel.setAttribute("for", "description");
+    descriptionLabel.innerText = "Description:";
 
-    let para4 = document.createElement("select");
-    para4.className = "selectBox";
+    let description = document.createElement("input");
+    description.className = "inputy";
+    description.value= todo.description;
+    description.id = "description";
 
-    let testerLabel = document.createElement("label");
-    testerLabel.setAttribute("for", para4);
-    testerLabel.innerText = "yo im a label";
+    let descriptionDiv = document.createElement("div");
+    descriptionDiv.className = "divForClass";
+    descriptionDiv.appendChild(descriptionLabel);
+    descriptionDiv.appendChild(description);
 
-    let opt0 = document.createElement("option");
-    opt0.value = "Priority:";
-    opt0.textContent = "Priority:";
-    para4.appendChild(opt0);
+    //dueDate cluster
+    let dueDateLabel = document.createElement("label");
+    dueDateLabel.setAttribute("for", "dueDate");
+    dueDateLabel.innerText = "Due Date:"
 
-    let opt1 = document.createElement("option");
-    opt1.value = "High";
-    opt1.textContent = "High";
-    para4.appendChild(opt1);
+    let dueDate = document.createElement("input");
+    dueDate.type = "date";
+    dueDate.className = "inputy";
+    dueDate.value = todo.dueDate;
+    dueDate.id = "dueDate";
 
-    let opt2 = document.createElement("option");
-    opt2.value = "Medium";
-    opt2.textContent = "Medium";
-    para4.appendChild(opt2);
+    let dueDateDiv = document.createElement("div");
+    dueDateDiv.className = "divForClass";
+    dueDateDiv.appendChild(dueDateLabel);
+    dueDateDiv.appendChild(dueDate);
 
-    let opt3 = document.createElement("option");
-    opt3.value = "Low";
-    opt3.textContent = "Low";
-    para4.appendChild(opt3);
+
+    //priority cluster
+    let priorityLabel = document.createElement("label");
+    priorityLabel.setAttribute("for", "priority");
+    priorityLabel.innerText = "Priority";
+
+    let priority = document.createElement("select");
+    priority.className = "selectBox";
+    priority.id = "priority";
+
+    let divForPriority = document.createElement("div");
+    divForPriority.className = "divForClass"
+    divForPriority.appendChild(priorityLabel);
+    divForPriority.appendChild(priority);
+
+
+    let high = document.createElement("option");
+    high.value = "High";
+    high.textContent = "High";
+    priority.appendChild(high);
+
+    let medium = document.createElement("option");
+    medium.value = "Medium";
+    medium.textContent = "Medium";
+    priority.appendChild(medium);
+
+    let low = document.createElement("option");
+    low.value = "Low";
+    low.textContent = "Low";
+    priority.appendChild(low);
 
 
     let editButton = document.createElement("button");
@@ -520,7 +552,7 @@ function openModal(project, id){
     addTaskDivButtons.className = "addTaskDivButtons";
 
     editButton.addEventListener("click", function(){
-        let newTodo = new Todo(para.value, para2.value, para3.value, para4.value);
+        let newTodo = new Todo(title.value, description.value, dueDate.value, priority.value);
         project.editTodo(id,newTodo);
         checkForAddTaskButton(project);
         closeModal();
@@ -530,11 +562,12 @@ function openModal(project, id){
         closeModal();
     });
     
-    addTaskDiv.appendChild(testerLabel);
-    addTaskDiv.appendChild(para);
-    addTaskDiv.appendChild(para2);
-    addTaskDiv.appendChild(para3);
-    addTaskDiv.appendChild(para4);
+    
+    addTaskDiv.appendChild(titleDiv);
+    addTaskDiv.appendChild(descriptionDiv);
+    addTaskDiv.appendChild(dueDateDiv);
+    addTaskDiv.appendChild(divForPriority);
+ 
     addTaskDivButtons.appendChild(cancelButton);
     addTaskDivButtons.appendChild(editButton);
     addTaskDiv.appendChild(addTaskDivButtons);
