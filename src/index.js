@@ -6,12 +6,12 @@ import Master from "./master.js";
 
 
 
-let kont = new Todo("proj1", "fds", "2024-10-01", "not high");
-let ppcaca = new Todo("proj1 2", "fdssss", "2024-10-02", "high");
-let ppcaca2 = new Todo("proj1 3", "fdssss", "2024-10-03", "high");
-let ppcaca3 = new Todo("PROJ2", "fdssss", "2024-10-04", "LOW");
-let ppcaca4 = new Todo("PROJ3", "fdssss", "2024-10-05", "LOW");
-let ppcaca5 = new Todo("PROJ3 2", "fdssss", "2024-10-06", "LOW");
+let task = new Todo("proj1", "fds", "2024-10-01", "Low");
+let task2 = new Todo("proj1 2", "fdssss", "2024-10-02", "High");
+let task3 = new Todo("proj1 3", "fdssss", "2024-10-03", "High");
+let task4 = new Todo("PROJ2", "fdssss", "2024-10-04", "Low");
+let task5 = new Todo("PROJ3", "fdssss", "2024-10-05", "Low");
+let task6= new Todo("PROJ3 2", "fdssss", "2024-10-06", "Low");
 let proj = new Project("Vacation");
 let proj2 = new Project("Goals");
 let proj3 = new Project("Dentist");
@@ -21,14 +21,12 @@ Master.addToMaster(proj2);
 Master.addToMaster(proj3);
 
 
-proj.addTodo(kont);
-proj.addTodo(ppcaca);
-proj.addTodo(ppcaca2);
-proj2.addTodo(ppcaca3);
-proj3.addTodo(ppcaca4);
-proj3.addTodo(ppcaca5);
-//proj.removeTodo(ppcaca2);
-//proj.listTodo();
+proj.addTodo(task);
+proj.addTodo(task2);
+proj.addTodo(task3);
+proj2.addTodo(task4);
+proj3.addTodo(task5);
+proj3.addTodo(task6);
 
 
 const projectBox = document.getElementById("projectBox");
@@ -41,6 +39,7 @@ inboxButton.textContent = "Inbox";
 projectBox.prepend(inboxButton);
 
 inboxButton.addEventListener("click", function(){
+    highlightButton(this);
     showAllProjects();
 });
 
@@ -77,6 +76,7 @@ function loadAddTaskArea(){
 
 function loadApplication(){
     populateProjects();
+    highlightButton(inboxButton);
     createAddProjectButton();
     showAllProjects();
 }
@@ -90,6 +90,7 @@ function populateProjects(){
             projectButton.textContent = project.name;
             projectId++;
             projectButton.addEventListener("click",function(){
+                highlightButton(this);
                 refreshTodos();
                 loadAddTaskArea();
                 populateTodos(project);
@@ -514,6 +515,7 @@ function openModal(project, id){
     let priority = document.createElement("select");
     priority.className = "selectBox";
     priority.id = "priority";
+    
 
     let divForPriority = document.createElement("div");
     divForPriority.className = "divForClass"
@@ -530,12 +532,13 @@ function openModal(project, id){
     medium.value = "Medium";
     medium.textContent = "Medium";
     priority.appendChild(medium);
-
+    
     let low = document.createElement("option");
     low.value = "Low";
     low.textContent = "Low";
     priority.appendChild(low);
 
+    priority.value = todo.priority;
 
     let editButton = document.createElement("button");
     editButton.textContent = "Edit";
@@ -585,5 +588,15 @@ function closeModal(){
     modal.firstChild.remove();
 }
 
+function highlightButton(button){
+     let holder = Array.from(projectBox.childNodes);
+     for(let i = 0; i < holder.length; i++){
+        if(holder[i].style.border){
+            holder[i].style.border = "none";
+        }
+     }
+    
+    button.style.border = "2px solid red";
+}
 
 
